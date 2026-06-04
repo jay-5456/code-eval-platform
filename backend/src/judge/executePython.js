@@ -44,8 +44,39 @@ function executePython(
           if (
             errorOutput.length > 0
           ) {
-            reject(errorOutput);
+
+            if(
+              errorOutput.includes(
+                "SyntaxError"
+              )
+            ){
+
+              reject({
+
+                type:
+                "Compilation Error",
+
+                message:
+                errorOutput
+
+              });
+
+              return;
+
+            }
+
+            reject({
+
+              type:
+              "Runtime Error",
+
+              message:
+              errorOutput
+
+            });
+
             return;
+
           }
 
           resolve(output);
