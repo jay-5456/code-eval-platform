@@ -1,37 +1,59 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import api from "../services/api";
 
 function Problems() {
-  const [problems, setProblems] = useState([]);
+
+  const [problems, setProblems] =
+    useState([]);
 
   useEffect(() => {
-    api
-      .get("/problems")
+
+    api.get("/problems")
       .then((res) => {
         setProblems(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+
   }, []);
 
   return (
     <div style={{ padding: "20px" }}>
+
       <h1>Problems</h1>
 
       {problems.map((problem) => (
-        <div
+
+        <Link
           key={problem.id}
+          to={`/problem/${problem.id}`}
           style={{
-            border: "1px solid #ccc",
-            marginBottom: "10px",
-            padding: "10px"
+            textDecoration: "none",
+            color: "black"
           }}
         >
-          <h2>{problem.title}</h2>
-          <p>Difficulty: {problem.difficulty}</p>
-        </div>
+
+          <div
+            style={{
+              border: "1px solid gray",
+              padding: "10px",
+              marginBottom: "10px"
+            }}
+          >
+            <h2>{problem.title}</h2>
+
+            <p>
+              Difficulty:
+              {" "}
+              {problem.difficulty}
+            </p>
+
+          </div>
+
+        </Link>
+
       ))}
+
     </div>
   );
 }

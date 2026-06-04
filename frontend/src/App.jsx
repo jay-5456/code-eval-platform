@@ -1,7 +1,24 @@
+import { Routes, Route } from "react-router-dom";
+
 import Problems from "./pages/Problems";
+import ProblemDetails from "./pages/ProblemDetails";
 
 function App() {
-  return <Problems />;
+  return (
+    <Routes>
+
+      <Route
+        path="/"
+        element={<Problems />}
+      />
+
+      <Route
+        path="/problem/:id"
+        element={<ProblemDetails />}
+      />
+
+    </Routes>
+  );
 }
 
 export default App;
