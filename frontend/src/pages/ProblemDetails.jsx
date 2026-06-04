@@ -60,9 +60,9 @@ const [verdict, setVerdict] =
         {problem.description}
       </p>
 
-      <h3>Test Cases</h3>
+      <h3>Sample Test Cases</h3>
 
-      {problem.testCases.map(
+{problem.sampleTestCases.map(
         (testcase, index) => (
 
           <div
