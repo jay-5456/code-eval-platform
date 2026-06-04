@@ -1,33 +1,31 @@
 import { useEffect, useState } from "react";
-
-
-import CodeEditor
-  from "../components/CodeEditor";
-
-import templates
-  from "../templates";
-
 import { useParams } from "react-router-dom";
 
 import api from "../services/api";
+
+import CodeEditor from "../components/CodeEditor";
+import templates from "../templates";
 
 function ProblemDetails() {
 
   const { id } = useParams();
 
   const [problem, setProblem] =
-  useState(null);
+    useState(null);
 
-const [language, setLanguage] =
-  useState("python");
+  const [language, setLanguage] =
+    useState("python");
 
-const [code, setCode] =
-  useState(
-    templates.python
-  );
+  const [code, setCode] =
+    useState(
+      templates.python
+    );
 
-const [verdict, setVerdict] =
-  useState("");
+  const [verdict, setVerdict] =
+    useState("");
+
+  const [runResult, setRunResult] =
+    useState([]);
 
   useEffect(() => {
 
@@ -37,9 +35,45 @@ const [verdict, setVerdict] =
 
         setProblem(res.data);
 
+      })
+      .catch((err) => {
+
+        console.error(err);
+
       });
 
   }, [id]);
+
+  const runCode = async () => {
+
+    try {
+
+      const res =
+        await api.post(
+          "/run",
+          {
+            problemId:
+              problem.id,
+            code
+          }
+        );
+
+      setRunResult(
+        res.data.results || []
+      );
+
+    }
+    catch (err) {
+
+      console.error(err);
+
+      alert(
+        "Error while running code"
+      );
+
+    }
+
+  };
 
   if (!problem) {
     return <h2>Loading...</h2>;
@@ -48,11 +82,12 @@ const [verdict, setVerdict] =
   return (
     <div style={{ padding: "20px" }}>
 
-      <h1>{problem.title}</h1>
+      <h1>
+        {problem.title}
+      </h1>
 
       <h3>
-        Difficulty:
-        {" "}
+        Difficulty:{" "}
         {problem.difficulty}
       </h3>
 
@@ -60,27 +95,34 @@ const [verdict, setVerdict] =
         {problem.description}
       </p>
 
-      <h3>Sample Test Cases</h3>
+      <h3>
+        Sample Test Cases
+      </h3>
 
-{problem.sampleTestCases.map(
+      {problem.sampleTestCases.map(
         (testcase, index) => (
 
           <div
             key={index}
             style={{
-              border: "1px solid gray",
+              border:
+                "1px solid gray",
               padding: "10px",
               marginBottom: "10px"
             }}
           >
 
-            <strong>Input:</strong>
+            <strong>
+              Input:
+            </strong>
 
             <pre>
               {testcase.input}
             </pre>
 
-            <strong>Output:</strong>
+            <strong>
+              Output:
+            </strong>
 
             <pre>
               {testcase.output}
@@ -90,70 +132,112 @@ const [verdict, setVerdict] =
 
         )
       )}
-<h2>Code Editor</h2>
 
-<select
-  value={language}
-  onChange={(e) => {
+      <hr />
 
-    setLanguage(
-      e.target.value
-    );
+      <h2>
+        Code Editor
+      </h2>
 
-    setCode(
-      templates[e.target.value]
-    );
+      <select
+        value={language}
+        onChange={(e) => {
 
-  }}
->
+          setLanguage(
+            e.target.value
+          );
 
-  <option value="python">
-    Python
-  </option>
+          setCode(
+            templates[
+              e.target.value
+            ]
+          );
 
-  <option value="cpp">
-    C++
-  </option>
+        }}
+      >
 
-  <option value="java">
-    Java
-  </option>
+        <option value="python">
+          Python
+        </option>
 
-  <option value="c">
-    C
-  </option>
+        <option value="cpp">
+          C++
+        </option>
 
-</select>
+        <option value="java">
+          Java
+        </option>
 
-<CodeEditor
-  language={language}
-  code={code}
-  setCode={setCode}
-/>
+        <option value="c">
+          C
+        </option>
 
-<br />
+      </select>
 
-<button>
+      <br />
+      <br />
 
-  Run
+      <CodeEditor
+        language={language}
+        code={code}
+        setCode={setCode}
+      />
 
-</button>
+      <br />
 
-<button
-  style={{
-    marginLeft: "10px"
-  }}
->
+      <button
+        onClick={runCode}
+      >
+        Run
+      </button>
 
-  Submit
+      <button
+        style={{
+          marginLeft: "10px"
+        }}
+      >
+        Submit
+      </button>
 
-</button>
+      <h2>
+        Verdict: {verdict}
+      </h2>
 
-<h2>
-  Verdict:
-  {" "}
-  {verdict}
-</h2>
+      <h2>
+        Run Results
+      </h2>
+
+      {
+        runResult.map(
+          (result) => (
+
+            <div
+              key={
+                result.testcase
+              }
+              style={{
+                marginBottom:
+                  "10px"
+              }}
+            >
+
+              Test Case{" "}
+              {result.testcase}
+              :
+              {" "}
+
+              {
+                result.passed
+                ? "✅ Passed"
+                : "❌ Failed"
+              }
+
+            </div>
+
+          )
+        )
+      }
+
     </div>
   );
 }
