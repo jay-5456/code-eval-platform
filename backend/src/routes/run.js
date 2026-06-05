@@ -74,11 +74,22 @@ results
 });
 }
 catch(err){
+
 res.json({
+
 status:"error",
+
+errorType:
+err.type ||
+
+"Runtime Error",
+
 message:
+err.message ||
 String(err)
+
 });
+
 }
 }
 );

@@ -26,7 +26,9 @@ function ProblemDetails() {
 
   const [runResult, setRunResult] =
     useState([]);
-
+  const [runError,
+setRunError] =
+useState(null);
   useEffect(() => {
 
     api
@@ -58,9 +60,26 @@ function ProblemDetails() {
           }
         );
 
-      setRunResult(
-        res.data.results || []
-      );
+      if(
+res.data.status ===
+"error"
+){
+
+setRunError(
+res.data
+);
+
+setRunResult([]);
+
+return;
+
+}
+
+setRunError(null);
+
+setRunResult(
+res.data.results || []
+);
 
     }
     catch (err) {
