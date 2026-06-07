@@ -316,7 +316,68 @@ runError.message
           )
         )
       }
+<hr />
 
+<h2>
+Submission Result
+</h2>
+
+{
+submitResult && (
+
+<div>
+
+<h3>
+
+{
+submitResult.verdict
+}
+
+</h3>
+
+{
+submitResult.passed !==
+undefined && (
+
+<p>
+
+Passed
+
+{" "}
+
+{
+submitResult.passed
+}
+
+/
+
+{
+submitResult.total
+}
+
+</p>
+
+)
+}
+
+{
+submitResult.message && (
+
+<pre>
+
+{
+submitResult.message
+}
+
+</pre>
+
+)
+}
+
+</div>
+
+)
+}
     </div>
   );
 }
