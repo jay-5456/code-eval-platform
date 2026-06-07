@@ -22,7 +22,11 @@ function ProblemDetails() {
     );
 
   const [verdict, setVerdict] =
-    useState("");
+useState("");
+
+const [submitResult,
+setSubmitResult] =
+useState(null);
 
   const [runResult, setRunResult] =
     useState([]);
