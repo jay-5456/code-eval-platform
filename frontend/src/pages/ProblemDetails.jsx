@@ -97,6 +97,34 @@ res.data.results || []
     }
 
   };
+  const submitCode =
+async () => {
+
+  try {
+
+    const res =
+      await api.post(
+        "/submit",
+        {
+          problemId:
+            problem.id,
+
+          code
+        }
+      );
+
+    setSubmitResult(
+      res.data
+    );
+
+  }
+  catch(err){
+
+    console.error(err);
+
+  }
+
+};
 
   if (!problem) {
     return <h2>Loading...</h2>;
@@ -215,12 +243,15 @@ res.data.results || []
       </button>
 
       <button
-        style={{
-          marginLeft: "10px"
-        }}
-      >
-        Submit
-      </button>
+onClick={submitCode}
+style={{
+marginLeft:"10px"
+}}
+>
+
+Submit
+
+</button>
 
       <h2>
         Verdict: {verdict}
