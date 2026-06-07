@@ -221,7 +221,32 @@ res.data.results || []
       <h2>
         Verdict: {verdict}
       </h2>
+{
+runError && (
 
+<div
+style={{
+color:"red",
+marginBottom:"20px"
+}}
+>
+
+<h3>
+{
+runError.errorType
+}
+</h3>
+
+<pre>
+{
+runError.message
+}
+</pre>
+
+</div>
+
+)
+}
       <h2>
         Run Results
       </h2>
