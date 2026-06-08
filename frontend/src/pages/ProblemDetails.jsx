@@ -287,35 +287,78 @@ runError.message
       </h2>
 
       {
-        runResult.map(
-          (result) => (
+  runResult.map(
+    (result) => (
 
-            <div
-              key={
-                result.testcase
-              }
-              style={{
-                marginBottom:
-                  "10px"
-              }}
-            >
+      <div
+        key={result.testcase}
+        style={{
+          border:
+            "1px solid gray",
+          padding: "10px",
+          marginBottom: "10px"
+        }}
+      >
 
-              Test Case{" "}
-              {result.testcase}
-              :
-              {" "}
+        <h4>
 
-              {
-                result.passed
-                ? "✅ Passed"
-                : "❌ Failed"
-              }
+          Test Case
+          {" "}
+          {result.testcase}
+
+          {" "}
+
+          {
+            result.passed
+            ? "✅ Passed"
+            : "❌ Failed"
+          }
+
+        </h4>
+
+        {
+          !result.passed && (
+
+            <div>
+
+              <p>
+
+                <strong>
+                  Expected:
+                </strong>
+
+                {" "}
+
+                {
+                  result.expected
+                }
+
+              </p>
+
+              <p>
+
+                <strong>
+                  Received:
+                </strong>
+
+                {" "}
+
+                {
+                  result.received
+                }
+
+              </p>
 
             </div>
 
           )
-        )
-      }
+        }
+
+      </div>
+
+    )
+  )
+}
 <hr />
 
 <h2>
@@ -325,21 +368,38 @@ Submission Result
 {
 submitResult && (
 
-<div>
+<div
+style={{
+border:
+"2px solid gray",
+padding:"15px",
+marginTop:"20px"
+}}
+>
 
-<h3>
+<h2>
 
 {
 submitResult.verdict
+=== "Accepted"
+
+? "✅ Accepted"
+
+: submitResult.verdict
+=== "Wrong Answer"
+
+? "❌ Wrong Answer"
+
+: `⚠ ${submitResult.verdict}`
 }
 
-</h3>
+</h2>
 
 {
 submitResult.passed !==
 undefined && (
 
-<p>
+<h3>
 
 Passed
 
@@ -355,7 +415,7 @@ submitResult.passed
 submitResult.total
 }
 
-</p>
+</h3>
 
 )
 }
