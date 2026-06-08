@@ -21,7 +21,14 @@ function Problems() {
     <div style={{ padding: "20px" }}>
 
       <h1>Problems</h1>
+      <Link
+to="/submissions"
+>
+View Submission History
+</Link>
 
+<br />
+<br />
       {problems.map((problem) => (
 
         <Link

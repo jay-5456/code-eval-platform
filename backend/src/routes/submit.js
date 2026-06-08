@@ -1,3 +1,5 @@
+const submissions =
+require("../data/submissions");
 const express =
 require("express");
 
@@ -94,7 +96,15 @@ passed++;
 
 }
 
-res.json({
+const submission = {
+
+id:
+Date.now(),
+
+problemId,
+
+language:
+"python",
 
 verdict:
 passed === total
@@ -103,14 +113,34 @@ passed === total
 
 passed,
 
-total
+total,
 
-});
+submittedAt:
+new Date()
+
+};
+
+submissions.push(
+submission
+);
+
+res.json(
+submission
+);
 
 }
 catch(err){
 
-res.json({
+const submission = {
+
+id:
+Date.now(),
+
+problemId:
+req.body.problemId,
+
+language:
+"python",
 
 verdict:
 err.type ||
@@ -118,9 +148,20 @@ err.type ||
 
 message:
 err.message ||
-String(err)
+String(err),
 
-});
+submittedAt:
+new Date()
+
+};
+
+submissions.push(
+submission
+);
+
+res.json(
+submission
+);
 
 }
 
