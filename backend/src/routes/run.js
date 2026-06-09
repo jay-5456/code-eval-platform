@@ -1,27 +1,57 @@
-const express =require("express");
-const fs =require("fs");
-const path =require("path");
-const router =express.Router();
-const problems =require("../data/problems");
-const executePython =require("../judge/executePython");
-const compareOutput =require("../judge/compareOutput");
+const express =
+require("express");
+
+const fs =
+require("fs");
+
+const path =
+require("path");
+
+const router =
+express.Router();
+
+const {
+  getProblemById
+} =
+require(
+"../models/problemModel"
+);
+
+const executePython =
+require("../judge/executePython");
+
+const compareOutput =
+require("../judge/compareOutput");
+
 router.post(
 "/",
 async (req,res)=>{
+
 try{
-const {problemId,code} = req.body;
+
+const {
+problemId,
+code
+} = req.body;
+
 const problem =
-problems.find(
-  p => p.id === problemId
+await getProblemById(
+problemId
 );
 
 if(!problem){
-return res.status(404)
+
+return res
+.status(404)
 .json({
-  message:
-  "Problem not found"
+
+message:
+"Problem not found"
+
 });
+
 }
+
 const filepath =
 path.join(
 __dirname,
@@ -51,11 +81,16 @@ filepath,
 testcase.input
 );
 
-const passed =compareOutput(output,testcase.output);
+const passed =
+compareOutput(
+output,
+testcase.output
+);
+
 results.push({
 
 testcase:
-i+1,
+i + 1,
 
 passed,
 
@@ -68,20 +103,26 @@ output.trim()
 });
 
 }
+
 res.json({
-status:"success",
+
+status:
+"success",
+
 results
+
 });
+
 }
 catch(err){
 
 res.json({
 
-status:"error",
+status:
+"error",
 
 errorType:
 err.type ||
-
 "Runtime Error",
 
 message:
@@ -91,7 +132,9 @@ String(err)
 });
 
 }
+
 }
 );
 
-module.exports =router;
+module.exports =
+router;

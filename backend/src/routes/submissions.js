@@ -4,16 +4,43 @@ require("express");
 const router =
 express.Router();
 
-const submissions =
-require("../data/submissions");
+const {
+getAllSubmissions
+}
+=
+require(
+"../models/submissionModel"
+);
 
 router.get(
 "/",
-(req,res)=>{
+async (req,res)=>{
+
+try{
+
+const submissions =
+await getAllSubmissions();
 
 res.json(
 submissions
 );
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+res.status(500)
+.json({
+
+message:
+"Server Error"
+
+});
+
+}
 
 }
 );

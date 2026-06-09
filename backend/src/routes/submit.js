@@ -1,5 +1,3 @@
-const submissions =
-require("../data/submissions");
 const express =
 require("express");
 
@@ -12,14 +10,25 @@ require("path");
 const router =
 express.Router();
 
-const problems =
-require("../data/problems");
-
 const executePython =
 require("../judge/executePython");
 
 const compareOutput =
 require("../judge/compareOutput");
+
+const {
+  getProblemById
+} =
+require(
+"../models/problemModel"
+);
+
+const {
+  createSubmission
+} =
+require(
+"../models/submissionModel"
+);
 
 router.post(
 "/",
@@ -33,8 +42,8 @@ code
 } = req.body;
 
 const problem =
-problems.find(
-p => p.id === problemId
+await getProblemById(
+problemId
 );
 
 if(!problem){
@@ -96,15 +105,18 @@ passed++;
 
 }
 
-const submission = {
+const submission =
+await createSubmission({
 
-id:
-Date.now(),
+user_id: 1,
 
+problem_id:
 problemId,
 
 language:
 "python",
+
+code,
 
 verdict:
 passed === total
@@ -113,16 +125,9 @@ passed === total
 
 passed,
 
-total,
+total
 
-submittedAt:
-new Date()
-
-};
-
-submissions.push(
-submission
-);
+});
 
 res.json(
 submission
@@ -131,37 +136,41 @@ submission
 }
 catch(err){
 
-const submission = {
+const submission =
+await createSubmission({
 
-id:
-Date.now(),
+user_id: 1,
 
-problemId:
+problem_id:
 req.body.problemId,
 
 language:
 "python",
 
+code:
+req.body.code,
+
 verdict:
 err.type ||
 "Runtime Error",
 
+passed:
+0,
+
+total:
+10
+
+});
+
+res.json({
+
+...submission,
+
 message:
 err.message ||
-String(err),
+String(err)
 
-submittedAt:
-new Date()
-
-};
-
-submissions.push(
-submission
-);
-
-res.json(
-submission
-);
+});
 
 }
 
