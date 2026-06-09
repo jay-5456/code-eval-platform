@@ -39,15 +39,20 @@ return result.rows[0];
 
 }
 
-async function getAllSubmissions(){
+async function
+getUserSubmissions(
+userId
+){
 
 const result =
 await pool.query(
 `
 SELECT *
 FROM submissions
+WHERE user_id = $1
 ORDER BY submitted_at DESC
-`
+`,
+[userId]
 );
 
 return result.rows;
@@ -56,5 +61,5 @@ return result.rows;
 
 module.exports = {
 createSubmission,
-getAllSubmissions
+getUserSubmissions
 };

@@ -1,6 +1,10 @@
 const express =
 require("express");
 
+const authMiddleware =
+require(
+"../middleware/authMiddleware"
+);
 const fs =
 require("fs");
 
@@ -32,6 +36,7 @@ require(
 
 router.post(
 "/",
+authMiddleware,
 async (req,res)=>{
 
 try{
@@ -108,7 +113,8 @@ passed++;
 const submission =
 await createSubmission({
 
-user_id: 1,
+user_id:
+req.user.id,
 
 problem_id:
 problemId,
@@ -139,7 +145,8 @@ catch(err){
 const submission =
 await createSubmission({
 
-user_id: 1,
+user_id:
+req.user.id,
 
 problem_id:
 req.body.problemId,

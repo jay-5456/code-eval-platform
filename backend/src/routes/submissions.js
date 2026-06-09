@@ -4,8 +4,13 @@ require("express");
 const router =
 express.Router();
 
+const authMiddleware =
+require(
+"../middleware/authMiddleware"
+);
+
 const {
-getAllSubmissions
+getUserSubmissions
 }
 =
 require(
@@ -14,12 +19,15 @@ require(
 
 router.get(
 "/",
+authMiddleware,
 async (req,res)=>{
 
 try{
 
 const submissions =
-await getAllSubmissions();
+await getUserSubmissions(
+req.user.id
+);
 
 res.json(
 submissions
