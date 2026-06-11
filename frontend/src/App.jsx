@@ -7,7 +7,8 @@ import Navbar
 from "./components/Navbar";
 import Problems
 from "./pages/Problems";
-
+import AdminDashboard
+from "./pages/AdminDashboard";
 import ProblemDetails
 from "./pages/ProblemDetails";
 
@@ -59,7 +60,12 @@ function App() {
           <Register />
         }
       />
-
+<Route
+path="/admin"
+element={
+<AdminDashboard />
+}
+/>
     </Routes>
 
 </>
