@@ -3,7 +3,8 @@ import {
   Route
 }
 from "react-router-dom";
-
+import Navbar
+from "./components/Navbar";
 import Problems
 from "./pages/Problems";
 
@@ -23,7 +24,10 @@ function App() {
 
   return (
 
-    <Routes>
+<>
+  <Navbar />
+
+  <Routes>
 
       <Route
         path="/"
@@ -58,7 +62,9 @@ function App() {
 
     </Routes>
 
-  );
+</>
+
+);
 
 }
 

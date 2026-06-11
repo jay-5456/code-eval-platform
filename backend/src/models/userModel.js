@@ -6,7 +6,6 @@ username,
 email,
 passwordHash
 ){
-
 const result =
 await pool.query(
 `
@@ -14,11 +13,12 @@ INSERT INTO users
 (
 username,
 email,
-password_hash
+password_hash,
+role
 )
 VALUES
 (
-$1,$2,$3
+$1,$2,$3,'user'
 )
 RETURNING *
 `,
