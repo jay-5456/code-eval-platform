@@ -70,8 +70,43 @@ async function getProblemById(id) {
 
   return problem;
 }
+async function createProblem(
+title,
+description,
+difficulty
+){
 
+const result =
+await pool.query(
+`
+INSERT INTO problems
+(
+title,
+description,
+difficulty
+)
+VALUES
+(
+$1,$2,$3
+)
+RETURNING *
+`,
+[
+title,
+description,
+difficulty
+]
+);
+
+return result.rows[0];
+
+}
 module.exports = {
-  getAllProblems,
-  getProblemById
+
+getAllProblems,
+
+getProblemById,
+
+createProblem
+
 };
