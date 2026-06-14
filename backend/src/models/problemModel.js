@@ -101,6 +101,40 @@ difficulty
 return result.rows[0];
 
 }
+async function addTestCase(
+problemId,
+input,
+output,
+isHidden
+){
+
+const result =
+await pool.query(
+`
+INSERT INTO testcases
+(
+problem_id,
+input,
+output,
+is_hidden
+)
+VALUES
+(
+$1,$2,$3,$4
+)
+RETURNING *
+`,
+[
+problemId,
+input,
+output,
+isHidden
+]
+);
+
+return result.rows[0];
+
+}
 module.exports = {
 
 getAllProblems,
