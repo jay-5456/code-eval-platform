@@ -9,26 +9,29 @@ function AdminDashboard(){
 const [title,setTitle] =
 useState("");
 
-const [
-description,
-setDescription
-]
-=
+const [description,setDescription] =
 useState("");
 
-const [
-difficulty,
-setDifficulty
-]
-=
+const [difficulty,setDifficulty] =
 useState("Easy");
+
+const [problemId,setProblemId] =
+useState("");
+
+const [input,setInput] =
+useState("");
+
+const [output,setOutput] =
+useState("");
+
+const [isHidden,setIsHidden] =
+useState(false);
 
 const createProblem =
 async () => {
 
 try{
 
-const res =
 await api.post(
 "/admin/problem",
 {
@@ -42,13 +45,6 @@ alert(
 "Problem Created"
 );
 
-console.log(
-res.data
-);
-
-setTitle("");
-setDescription("");
-
 }
 catch(err){
 
@@ -56,8 +52,38 @@ alert(
 "Failed"
 );
 
-console.log(
-err
+}
+
+};
+
+const createTestCase =
+async () => {
+
+try{
+
+await api.post(
+"/admin/testcase",
+{
+problemId:
+Number(problemId),
+
+input,
+
+output,
+
+isHidden
+}
+);
+
+alert(
+"Test Case Added"
+);
+
+}
+catch(err){
+
+alert(
+"Failed"
 );
 
 }
@@ -76,6 +102,8 @@ padding:"20px"
 Admin Dashboard
 </h1>
 
+<hr />
+
 <h2>
 Create Problem
 </h2>
@@ -87,9 +115,6 @@ onChange={(e)=>
 setTitle(
 e.target.value
 )}
-style={{
-width:"400px"
-}}
 />
 
 <br />
@@ -146,6 +171,85 @@ createProblem
 >
 
 Create Problem
+
+</button>
+
+<hr />
+
+<h2>
+Add Test Case
+</h2>
+
+<input
+placeholder=
+"Problem ID"
+value={
+problemId
+}
+onChange={(e)=>
+setProblemId(
+e.target.value
+)}
+/>
+
+<br />
+<br />
+
+<textarea
+placeholder=
+"Input"
+value={input}
+onChange={(e)=>
+setInput(
+e.target.value
+)}
+rows="4"
+cols="50"
+/>
+
+<br />
+<br />
+
+<textarea
+placeholder=
+"Output"
+value={output}
+onChange={(e)=>
+setOutput(
+e.target.value
+)}
+rows="4"
+cols="50"
+/>
+
+<br />
+<br />
+
+<label>
+
+<input
+type="checkbox"
+checked={isHidden}
+onChange={(e)=>
+setIsHidden(
+e.target.checked
+)}
+/>
+
+Hidden Test Case
+
+</label>
+
+<br />
+<br />
+
+<button
+onClick={
+createTestCase
+}
+>
+
+Add Test Case
 
 </button>
 

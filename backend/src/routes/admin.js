@@ -15,7 +15,8 @@ require(
 );
 
 const {
-createProblem
+createProblem,
+addTestCase
 }
 =
 require(
@@ -51,6 +52,64 @@ difficulty
 
 res.json(
 problem
+);
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+res.status(500)
+.json({
+
+message:
+"Server Error"
+
+});
+
+}
+
+}
+);
+router.post(
+"/testcase",
+authMiddleware,
+adminMiddleware,
+async (req,res)=>{
+
+try{
+
+const {
+
+problemId,
+
+input,
+
+output,
+
+isHidden
+
+}
+=
+req.body;
+
+const testcase =
+await addTestCase(
+
+problemId,
+
+input,
+
+output,
+
+isHidden
+
+);
+
+res.json(
+testcase
 );
 
 }

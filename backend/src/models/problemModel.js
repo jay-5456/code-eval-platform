@@ -141,6 +141,8 @@ getAllProblems,
 
 getProblemById,
 
-createProblem
+createProblem,
+
+addTestCase
 
 };
