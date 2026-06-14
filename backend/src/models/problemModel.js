@@ -135,6 +135,19 @@ isHidden
 return result.rows[0];
 
 }
+async function deleteProblem(
+id
+){
+
+await pool.query(
+`
+DELETE FROM problems
+WHERE id = $1
+`,
+[id]
+);
+
+}
 module.exports = {
 
 getAllProblems,
@@ -143,6 +156,8 @@ getProblemById,
 
 createProblem,
 
-addTestCase
+addTestCase,
+
+deleteProblem
 
 };

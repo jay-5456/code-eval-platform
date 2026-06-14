@@ -1,4 +1,7 @@
-import { useState }
+import {
+useState,
+useEffect
+}
 from "react";
 
 import api
@@ -26,6 +29,9 @@ useState("");
 
 const [isHidden,setIsHidden] =
 useState(false);
+const [problems,setProblems]
+=
+useState([]);
 
 const createProblem =
 async () => {
@@ -44,6 +50,7 @@ difficulty
 alert(
 "Problem Created"
 );
+loadProblems();
 
 }
 catch(err){
@@ -89,6 +96,48 @@ alert(
 }
 
 };
+const loadProblems =
+async () => {
+
+const res =
+await api.get(
+"/problems"
+);
+
+setProblems(
+res.data
+);
+
+};
+const deleteProblem =
+async (id) => {
+
+try{
+
+await api.delete(
+`/admin/problem/${id}`
+);
+
+loadProblems();
+
+}
+catch(err){
+
+alert(
+"Delete Failed"
+);
+
+}
+
+};
+useEffect(
+() => {
+
+loadProblems();
+
+},
+[]
+);
 
 return(
 
@@ -252,6 +301,57 @@ createTestCase
 Add Test Case
 
 </button>
+<hr />
+
+<h2>
+Existing Problems
+</h2>
+
+{
+problems.map(
+(problem)=>(
+<div
+key={problem.id}
+style={{
+border:
+"1px solid gray",
+padding:"10px",
+marginBottom:"10px"
+}}
+>
+
+<strong>
+
+{problem.id}
+-
+{problem.title}
+
+</strong>
+
+<br />
+
+Difficulty:
+{" "}
+{problem.difficulty}
+
+<br />
+<br />
+
+<button
+onClick={()=>
+deleteProblem(
+problem.id
+)}
+>
+
+Delete
+
+</button>
+
+</div>
+)
+)
+}
 
 </div>
 
