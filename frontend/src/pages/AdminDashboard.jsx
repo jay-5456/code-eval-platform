@@ -32,6 +32,9 @@ useState(false);
 const [problems,setProblems]
 =
 useState([]);
+const [editingId,setEditingId]
+=
+useState(null);
 
 const createProblem =
 async () => {
@@ -106,6 +109,26 @@ await api.get(
 
 setProblems(
 res.data
+);
+
+};
+const editProblem =
+(problem) => {
+
+setEditingId(
+problem.id
+);
+
+setTitle(
+problem.title
+);
+
+setDescription(
+problem.description
+);
+
+setDifficulty(
+problem.difficulty
 );
 
 };
@@ -215,11 +238,50 @@ Hard
 
 <button
 onClick={
-createProblem
+async ()=>{
+
+if(editingId){
+
+await api.put(
+
+`/admin/problem/${editingId}`,
+
+{
+title,
+description,
+difficulty
+}
+
+);
+
+alert(
+"Problem Updated"
+);
+
+setEditingId(
+null
+);
+
+loadProblems();
+
+}
+else{
+
+createProblem();
+
+}
+
+}
 }
 >
 
-Create Problem
+{
+editingId
+?
+"Update Problem"
+:
+"Create Problem"
+}
 
 </button>
 
@@ -336,6 +398,20 @@ Difficulty:
 
 <br />
 <br />
+
+<button
+onClick={()=>
+editProblem(
+problem
+)
+}
+>
+
+Edit
+
+</button>
+
+{" "}
 
 <button
 onClick={()=>

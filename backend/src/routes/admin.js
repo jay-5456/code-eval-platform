@@ -17,7 +17,8 @@ require(
 const {
 createProblem,
 addTestCase,
-deleteProblem
+deleteProblem,
+updateProblem
 }
 =
 require(
@@ -150,6 +151,58 @@ message:
 "Problem deleted"
 
 });
+
+}
+catch(err){
+
+console.error(
+err
+);
+
+res.status(500)
+.json({
+
+message:
+"Server Error"
+
+});
+
+}
+
+}
+);
+router.put(
+"/problem/:id",
+authMiddleware,
+adminMiddleware,
+async (req,res)=>{
+
+try{
+
+const {
+title,
+description,
+difficulty
+}
+=
+req.body;
+
+const problem =
+await updateProblem(
+
+req.params.id,
+
+title,
+
+description,
+
+difficulty
+
+);
+
+res.json(
+problem
+);
 
 }
 catch(err){

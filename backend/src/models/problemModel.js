@@ -148,6 +148,40 @@ WHERE id = $1
 );
 
 }
+async function updateProblem(
+id,
+title,
+description,
+difficulty
+){
+
+const result =
+await pool.query(
+`
+UPDATE problems
+SET
+
+title = $1,
+
+description = $2,
+
+difficulty = $3
+
+WHERE id = $4
+
+RETURNING *
+`,
+[
+title,
+description,
+difficulty,
+id
+]
+);
+
+return result.rows[0];
+
+}
 module.exports = {
 
 getAllProblems,
@@ -158,6 +192,8 @@ createProblem,
 
 addTestCase,
 
-deleteProblem
+deleteProblem,
+
+updateProblem
 
 };
