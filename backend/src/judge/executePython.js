@@ -1,91 +1,84 @@
-const { exec } =
-require("child_process");
+const {
+exec
+}
+=
+require(
+"child_process"
+);
 
 function executePython(
-  filepath,
-  input
-) {
+filepath,
+input
+){
 
-  return new Promise(
-    (resolve, reject) => {
+return new Promise(
+(resolve,reject)=>{
 
-      const process =
-      exec(
-        `python "${filepath}"`
-      );
+const dockerCommand =
+`docker run --rm -i -v "${filepath}:/app/user.py" codeeval-python python /app/user.py`;
 
-      let output = "";
-      let errorOutput = "";
+const process =
+exec(
 
-      process.stdin.write(
-        input
-      );
+dockerCommand,
 
-      process.stdin.end();
+{
+timeout:3000
+},
 
-      process.stdout.on(
-        "data",
-        (data) => {
-          output += data;
-        }
-      );
+(error,stdout,stderr)=>{
 
-      process.stderr.on(
-        "data",
-        (data) => {
-          errorOutput += data;
-        }
-      );
+if(error){
 
-      process.on(
-        "close",
-        () => {
+if(
+error.killed
+){
 
-          if (
-            errorOutput.length > 0
-          ) {
+reject({
 
-            if(
-              errorOutput.includes(
-                "SyntaxError"
-              )
-            ){
+type:
+"Time Limit Exceeded",
 
-              reject({
+message:
+"Execution exceeded 3 seconds"
 
-                type:
-                "Compilation Error",
+});
 
-                message:
-                errorOutput
+return;
 
-              });
+}
 
-              return;
+reject({
 
-            }
+type:
+"Runtime Error",
 
-            reject({
+message:
+stderr ||
+error.message
 
-              type:
-              "Runtime Error",
+});
 
-              message:
-              errorOutput
+return;
 
-            });
+}
 
-            return;
+resolve(
+stdout
+);
 
-          }
+}
 
-          resolve(output);
+);
 
-        }
-      );
+process.stdin.write(
+input
+);
 
-    }
-  );
+process.stdin.end();
+
+}
+);
 
 }
 
