@@ -107,14 +107,16 @@ async () => {
 
     const res =
       await api.post(
-        "/submit",
-        {
-          problemId:
-            problem.id,
+"/submit",
+{
+  problemId:
+    problem.id,
 
-          code
-        }
-      );
+  code,
+
+  language
+}
+);
 
     setSubmitResult(
       res.data

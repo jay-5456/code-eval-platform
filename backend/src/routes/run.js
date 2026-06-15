@@ -31,9 +31,13 @@ try{
 
 const {
 problemId,
-code
+code,
+language
 } = req.body;
-
+console.log(
+"Language:",
+language
+);
 const problem =
 await getProblemById(
 problemId
