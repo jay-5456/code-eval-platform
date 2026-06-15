@@ -56,13 +56,16 @@ useState(null);
 
       const res =
         await api.post(
-          "/run",
-          {
-            problemId:
-              problem.id,
-            code
-          }
-        );
+"/run",
+{
+  problemId:
+    problem.id,
+
+  code,
+
+  language
+}
+);
 
       if(
 res.data.status ===
