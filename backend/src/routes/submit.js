@@ -14,8 +14,8 @@ require("path");
 const router =
 express.Router();
 
-const executePython =
-require("../judge/executePython");
+const executeCode =
+require("../judge/executeCode");
 
 const compareOutput =
 require("../judge/compareOutput");
@@ -43,8 +43,11 @@ try{
 
 const {
 problemId,
-code
-} = req.body;
+code,
+language
+}
+=
+req.body;
 
 const problem =
 await getProblemById(
@@ -64,10 +67,22 @@ verdict:
 
 }
 
+const extensionMap = {
+
+python:"py",
+
+cpp:"cpp",
+
+c:"c",
+
+java:"java"
+
+};
+
 const filepath =
 path.join(
 __dirname,
-"../../submissions/user.py"
+`../../submissions/user.${extensionMap[language]}`
 );
 
 fs.writeFileSync(
@@ -93,9 +108,14 @@ problem
 .hiddenTestCases[i];
 
 const output =
-await executePython(
+await executeCode(
+
+language,
+
 filepath,
+
 testcase.input
+
 );
 
 const result =

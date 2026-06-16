@@ -4,6 +4,8 @@ const executeCpp =
 require("./executeCpp");
 const executeC =
 require("./executeC");  
+const executeJava =
+require("./executeJava");
 async function executeCode(
 language,
 filepath,
@@ -27,6 +29,12 @@ input
 case "c":
 
 return await executeC(
+filepath,
+input
+);
+case "java":
+
+return await executeJava(
 filepath,
 input
 );
