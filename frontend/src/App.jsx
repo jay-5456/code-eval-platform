@@ -1,10 +1,13 @@
 import {
-  Routes,
-  Route
+Routes,
+Route,
+Navigate
 }
 from "react-router-dom";
 import Navbar
 from "./components/Navbar";
+import ProtectedRoute
+from "./components/ProtectedRoute";
 import Problems
 from "./pages/Problems";
 import AdminDashboard
@@ -31,21 +34,39 @@ function App() {
   <Routes>
 
       <Route
-        path="/"
-        element={<Problems />}
-      />
+path="/"
+element={
+localStorage.getItem(
+"token"
+)
+?
+<ProtectedRoute>
+<Problems />
+</ProtectedRoute>
+:
+<Navigate
+to="/login"
+/>
+}
+/>
 
       <Route
-        path="/problem/:id"
-        element={<ProblemDetails />}
-      />
+path="/problem/:id"
+element={
+<ProtectedRoute>
+<ProblemDetails />
+</ProtectedRoute>
+}
+/>
 
-      <Route
-        path="/submissions"
-        element={
-          <Submissions />
-        }
-      />
+     <Route
+path="/submissions"
+element={
+<ProtectedRoute>
+<Submissions />
+</ProtectedRoute>
+}
+/>
 
       <Route
         path="/login"
@@ -63,7 +84,9 @@ function App() {
 <Route
 path="/admin"
 element={
+<ProtectedRoute>
 <AdminDashboard />
+</ProtectedRoute>
 }
 />
     </Routes>
