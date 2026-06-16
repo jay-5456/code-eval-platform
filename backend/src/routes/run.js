@@ -17,8 +17,8 @@ require(
 "../models/problemModel"
 );
 
-const executePython =
-require("../judge/executePython");
+const executeCode =
+require("../judge/executeCode");
 
 const compareOutput =
 require("../judge/compareOutput");
@@ -56,10 +56,22 @@ message:
 
 }
 
+const extensionMap = {
+
+python:"py",
+
+cpp:"cpp",
+
+java:"java",
+
+c:"c"
+
+};
+
 const filepath =
 path.join(
 __dirname,
-"../../submissions/user.py"
+`../../submissions/user.${extensionMap[language]}`
 );
 
 fs.writeFileSync(
@@ -80,9 +92,14 @@ const testcase =
 problem.sampleTestCases[i];
 
 const output =
-await executePython(
+await executeCode(
+
+language,
+
 filepath,
+
 testcase.input
+
 );
 
 const passed =
