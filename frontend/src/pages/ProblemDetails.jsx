@@ -136,16 +136,36 @@ async () => {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+  <div
+    style={{
+      backgroundColor:"#0f0f0f",
+      minHeight:"100vh",
+      padding:"30px",
+      color:"#ffffff"
+    }}
+  >
 
-      <h1>
-        {problem.title}
-      </h1>
+      <h1
+  style={{
+    marginBottom:"10px"
+  }}
+>
+  {problem.title}
+</h1>
 
-      <h3>
-        Difficulty:{" "}
-        {problem.difficulty}
-      </h3>
+<div
+  style={{
+    display:"inline-block",
+    padding:"8px 14px",
+    backgroundColor:"#ffffff",
+    color:"#000000",
+    borderRadius:"20px",
+    fontWeight:"600",
+    marginBottom:"20px"
+  }}
+>
+  {problem.difficulty}
+</div>
 
       <p>
         {problem.description}
