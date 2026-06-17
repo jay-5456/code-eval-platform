@@ -181,11 +181,12 @@ async () => {
           <div
             key={index}
             style={{
-              border:
-                "1px solid gray",
-              padding: "10px",
-              marginBottom: "10px"
-            }}
+  backgroundColor:"#171717",
+  border:"1px solid #2a2a2a",
+  borderRadius:"12px",
+  padding:"15px",
+  marginBottom:"15px"
+}}
           >
 
             <strong>
@@ -216,21 +217,28 @@ async () => {
       </h2>
 
       <select
-        value={language}
-        onChange={(e) => {
+value={language}
+onChange={(e) => {
 
-          setLanguage(
-            e.target.value
-          );
+setLanguage(
+e.target.value
+);
 
-          setCode(
-            templates[
-              e.target.value
-            ]
-          );
+setCode(
+templates[
+e.target.value
+]
+);
 
-        }}
-      >
+}}
+style={{
+padding:"10px",
+borderRadius:"8px",
+backgroundColor:"#171717",
+color:"#ffffff",
+border:"1px solid #2a2a2a"
+}}
+>
 
         <option value="python">
           Python
@@ -262,10 +270,19 @@ async () => {
       <br />
 
       <button
-        onClick={runCode}
-      >
-        Run
-      </button>
+onClick={runCode}
+style={{
+backgroundColor:"#ffffff",
+color:"#000000",
+border:"none",
+padding:"10px 20px",
+borderRadius:"8px",
+fontWeight:"600",
+cursor:"pointer"
+}}
+>
+Run
+</button>
 
       <button
 onClick={submitCode}
