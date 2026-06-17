@@ -287,7 +287,14 @@ Run
       <button
 onClick={submitCode}
 style={{
-marginLeft:"10px"
+marginLeft:"10px",
+backgroundColor:"#22c55e",
+color:"#ffffff",
+border:"none",
+padding:"10px 20px",
+borderRadius:"8px",
+fontWeight:"600",
+cursor:"pointer"
 }}
 >
 
@@ -335,11 +342,12 @@ runError.message
       <div
         key={result.testcase}
         style={{
-          border:
-            "1px solid gray",
-          padding: "10px",
-          marginBottom: "10px"
-        }}
+backgroundColor:"#171717",
+border:"1px solid #2a2a2a",
+borderRadius:"12px",
+padding:"15px",
+marginBottom:"15px"
+}}
       >
 
         <h4>
@@ -412,9 +420,10 @@ submitResult && (
 
 <div
 style={{
-border:
-"2px solid gray",
-padding:"15px",
+backgroundColor:"#171717",
+border:"1px solid #2a2a2a",
+borderRadius:"12px",
+padding:"20px",
 marginTop:"20px"
 }}
 >
