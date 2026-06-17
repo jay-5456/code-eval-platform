@@ -34,13 +34,39 @@ return(
 
 <div
 style={{
+backgroundColor:"#0f0f0f",
+minHeight:"100vh",
+padding:"30px",
+color:"#ffffff"
+}}
+>
+
+<h1
+style={{
+marginBottom:"30px"
+}}
+>
+Submission History
+</h1>
+
+{
+submissions.length === 0 && (
+
+<div
+style={{
+backgroundColor:"#171717",
+border:"1px solid #2a2a2a",
+borderRadius:"12px",
 padding:"20px"
 }}
 >
 
-<h1>
-Submission History
-</h1>
+No submissions found.
+
+</div>
+
+)
+}
 
 {
 submissions
@@ -54,38 +80,73 @@ key={
 submission.id
 }
 style={{
-border:
-"1px solid gray",
-padding:"10px",
-marginBottom:"10px"
+backgroundColor:"#171717",
+border:"1px solid #2a2a2a",
+borderRadius:"12px",
+padding:"20px",
+marginBottom:"15px"
 }}
 >
 
-<h3>
+<h3
+style={{
+color:
+submission.verdict ===
+"Accepted"
+
+? "#22c55e"
+
+: "#ef4444",
+
+marginBottom:"15px"
+}}
+>
+
 {
 submission.verdict
 }
+
 </h3>
 
-<p>
-Problem:
+<p
+style={{
+color:"#d4d4d8"
+}}
+>
+
+Problem ID:
+{" "}
+
 {
 submission.problemId
 }
+
 </p>
 
-<p>
+<p
+style={{
+color:"#d4d4d8"
+}}
+>
+
 Language:
+{" "}
+
 {
 submission.language
 }
+
 </p>
 
 {
 submission.passed !==
 undefined && (
 
-<p>
+<p
+style={{
+color:"#d4d4d8"
+}}
+>
 
 Passed
 
@@ -106,7 +167,12 @@ submission.total
 )
 }
 
-<p>
+<p
+style={{
+color:"#a1a1aa",
+marginTop:"10px"
+}}
+>
 
 {
 new Date(
