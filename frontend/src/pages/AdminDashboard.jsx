@@ -323,7 +323,13 @@ editingId
 
 </button>
 
-<hr />
+<div
+style={{
+height:"1px",
+backgroundColor:"#2a2a2a",
+margin:"40px 0"
+}}
+/>
 
 <h2>
 Add Test Case
@@ -431,7 +437,13 @@ cursor:"pointer"
 Add Test Case
 
 </button>
-<hr />
+<div
+style={{
+height:"1px",
+backgroundColor:"#2a2a2a",
+margin:"40px 0"
+}}
+/>
 
 <h2>
 Existing Problems
@@ -443,26 +455,44 @@ problems.map(
 <div
 key={problem.id}
 style={{
-border:
-"1px solid gray",
-padding:"10px",
+backgroundColor:"#171717",
+border:"1px solid #2a2a2a",
+borderRadius:"12px",
+padding:"20px",
+marginBottom:"15px"
+}}
+>
+
+<h3
+style={{
+marginTop:"0px",
 marginBottom:"10px"
 }}
 >
 
-<strong>
+#{problem.id}
 
-{problem.id}
--
+{" "}
+
 {problem.title}
 
-</strong>
+</h3>
 
 <br />
 
+<p
+style={{
+color:"#a1a1aa"
+}}
+>
+
 Difficulty:
+
 {" "}
+
 {problem.difficulty}
+
+</p>
 
 <br />
 <br />
@@ -473,6 +503,15 @@ editProblem(
 problem
 )
 }
+style={{
+backgroundColor:"#ffffff",
+color:"#000000",
+border:"none",
+padding:"8px 16px",
+borderRadius:"8px",
+cursor:"pointer",
+fontWeight:"600"
+}}
 >
 
 Edit
@@ -486,6 +525,16 @@ onClick={()=>
 deleteProblem(
 problem.id
 )}
+style={{
+backgroundColor:"#ef4444",
+color:"#ffffff",
+border:"none",
+padding:"8px 16px",
+borderRadius:"8px",
+cursor:"pointer",
+fontWeight:"600",
+marginLeft:"10px"
+}}
 >
 
 Delete
