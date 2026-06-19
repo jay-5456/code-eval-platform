@@ -310,8 +310,12 @@ runError && (
 
 <div
 style={{
-color:"red",
-marginBottom:"20px"
+backgroundColor:"#171717",
+border:"1px solid #ef4444",
+borderRadius:"12px",
+padding:"20px",
+marginBottom:"20px",
+color:"#ef4444"
 }}
 >
 
@@ -428,7 +432,26 @@ marginTop:"20px"
 }}
 >
 
-<h2>
+<h2
+style={{
+color:
+submitResult.verdict ===
+"Accepted"
+
+? "#22c55e"
+
+:
+
+submitResult.verdict ===
+"Wrong Answer"
+
+? "#ef4444"
+
+:
+
+"#facc15"
+}}
+>
 
 {
 submitResult.verdict
