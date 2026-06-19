@@ -353,55 +353,85 @@ padding:"15px",
 marginBottom:"15px"
 }}
       >
+<h4
+style={{
+color:
+result.passed
+? "#22c55e"
+: "#ef4444",
 
-        <h4>
+marginTop:"0px"
+}}
+>
 
-          Test Case
-          {" "}
-          {result.testcase}
+Test Case
 
-          {" "}
+{" "}
 
-          {
-            result.passed
-            ? "✅ Passed"
-            : "❌ Failed"
-          }
+{result.testcase}
 
-        </h4>
+{" "}
+
+{
+
+result.passed
+
+? "✅ Passed"
+
+: "❌ Failed"
+
+}
+
+</h4>
 
         {
           !result.passed && (
 
             <div>
 
-              <p>
+              <p
+style={{
+color:"#a1a1aa"
+}}
+>
 
-                <strong>
-                  Expected:
-                </strong>
+<strong>
 
-                {" "}
+Expected:
 
-                {
-                  result.expected
-                }
+</strong>
 
-              </p>
+{" "}
 
-              <p>
+{
 
-                <strong>
-                  Received:
-                </strong>
+result.expected
 
-                {" "}
+}
 
-                {
-                  result.received
-                }
+</p>
 
-              </p>
+              <p
+style={{
+color:"#a1a1aa"
+}}
+>
+
+<strong>
+
+Received:
+
+</strong>
+
+{" "}
+
+{
+
+result.received
+
+}
+
+</p>
 
             </div>
 
