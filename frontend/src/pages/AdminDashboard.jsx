@@ -166,11 +166,18 @@ return(
 
 <div
 style={{
-padding:"20px"
+backgroundColor:"#0f0f0f",
+minHeight:"100vh",
+padding:"30px",
+color:"#ffffff"
 }}
 >
 
-<h1>
+<h1
+style={{
+marginBottom:"30px"
+}}
+>
 Admin Dashboard
 </h1>
 
@@ -187,6 +194,14 @@ onChange={(e)=>
 setTitle(
 e.target.value
 )}
+style={{
+width:"400px",
+padding:"12px",
+borderRadius:"8px",
+border:"1px solid #333",
+backgroundColor:"#171717",
+color:"#ffffff"
+}}
 />
 
 <br />
@@ -203,7 +218,14 @@ setDescription(
 e.target.value
 )}
 rows="5"
-cols="60"
+style={{
+width:"500px",
+padding:"12px",
+borderRadius:"8px",
+border:"1px solid #333",
+backgroundColor:"#171717",
+color:"#ffffff"
+}}
 />
 
 <br />
@@ -217,6 +239,13 @@ onChange={(e)=>
 setDifficulty(
 e.target.value
 )}
+style={{
+padding:"12px",
+borderRadius:"8px",
+backgroundColor:"#171717",
+color:"#ffffff",
+border:"1px solid #333"
+}}
 >
 
 <option>
@@ -273,6 +302,15 @@ createProblem();
 
 }
 }
+style={{
+backgroundColor:"#ffffff",
+color:"#000000",
+border:"none",
+padding:"12px 20px",
+borderRadius:"8px",
+fontWeight:"600",
+cursor:"pointer"
+}}
 >
 
 {
@@ -301,11 +339,18 @@ onChange={(e)=>
 setProblemId(
 e.target.value
 )}
+style={{
+width:"400px",
+padding:"12px",
+borderRadius:"8px",
+border:"1px solid #333",
+backgroundColor:"#171717",
+color:"#ffffff"
+}}
 />
 
 <br />
 <br />
-
 <textarea
 placeholder=
 "Input"
@@ -315,7 +360,14 @@ setInput(
 e.target.value
 )}
 rows="4"
-cols="50"
+style={{
+width:"500px",
+padding:"12px",
+borderRadius:"8px",
+border:"1px solid #333",
+backgroundColor:"#171717",
+color:"#ffffff"
+}}
 />
 
 <br />
@@ -330,7 +382,14 @@ setOutput(
 e.target.value
 )}
 rows="4"
-cols="50"
+style={{
+width:"500px",
+padding:"12px",
+borderRadius:"8px",
+border:"1px solid #333",
+backgroundColor:"#171717",
+color:"#ffffff"
+}}
 />
 
 <br />
@@ -358,6 +417,15 @@ Hidden Test Case
 onClick={
 createTestCase
 }
+style={{
+backgroundColor:"#ffffff",
+color:"#000000",
+border:"none",
+padding:"12px 20px",
+borderRadius:"8px",
+fontWeight:"600",
+cursor:"pointer"
+}}
 >
 
 Add Test Case
