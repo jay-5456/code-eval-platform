@@ -44,19 +44,38 @@ return null;
 
 }
 
+const linkStyle = {
+
+color:"#ffffff",
+
+textDecoration:"none",
+
+padding:"10px 16px",
+
+borderRadius:"10px",
+
+fontWeight:"500"
+
+};
+
+const activeStyle = {
+
+backgroundColor:"#ffffff",
+
+color:"#000000"
+
+};
+
 return(
 
 <div
 style={{
 backgroundColor:"#111111",
-borderBottom:
-"1px solid #2a2a2a",
+borderBottom:"1px solid #2a2a2a",
 padding:"16px 32px",
 display:"flex",
-justifyContent:
-"space-between",
-alignItems:
-"center"
+justifyContent:"space-between",
+alignItems:"center"
 }}
 >
 
@@ -92,11 +111,16 @@ gap:"20px"
 <Link
 to="/"
 style={{
-color:"#ffffff",
-textDecoration:"none"
+...linkStyle,
+
+...(location.pathname === "/"
+? activeStyle
+: {})
 }}
 >
+
 Problems
+
 </Link>
 
 {
@@ -105,11 +129,18 @@ user && (
 <Link
 to="/submissions"
 style={{
-color:"#ffffff",
-textDecoration:"none"
+...linkStyle,
+
+...(location.pathname ===
+"/submissions"
+
+? activeStyle
+: {})
 }}
 >
+
 Submissions
+
 </Link>
 
 )
@@ -123,11 +154,18 @@ user.role ===
 <Link
 to="/admin"
 style={{
-color:"#ffffff",
-textDecoration:"none"
+...linkStyle,
+
+...(location.pathname ===
+"/admin"
+
+? activeStyle
+: {})
 }}
 >
+
 Admin
+
 </Link>
 
 )
@@ -137,25 +175,25 @@ Admin
 !user && (
 
 <>
+
 <Link
 to="/login"
-style={{
-color:"#ffffff",
-textDecoration:"none"
-}}
+style={linkStyle}
 >
+
 Login
+
 </Link>
 
 <Link
 to="/register"
-style={{
-color:"#ffffff",
-textDecoration:"none"
-}}
+style={linkStyle}
 >
+
 Register
+
 </Link>
+
 </>
 
 )
@@ -169,17 +207,13 @@ onClick={
 handleLogout
 }
 style={{
-backgroundColor:
-"#ffffff",
-color:"#000000",
+backgroundColor:"#ef4444",
+color:"#ffffff",
 border:"none",
-padding:
-"8px 16px",
-borderRadius:
-"8px",
+padding:"10px 18px",
+borderRadius:"10px",
 cursor:"pointer",
-fontWeight:
-"600"
+fontWeight:"600"
 }}
 >
 
