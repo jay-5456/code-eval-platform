@@ -10,6 +10,8 @@ import ProtectedRoute
 from "./components/ProtectedRoute";
 import Problems
 from "./pages/Problems";
+import Footer
+from "./components/Footer";
 import AdminDashboard
 from "./pages/AdminDashboard";
 import ProblemDetails
@@ -90,6 +92,7 @@ element={
 }
 />
     </Routes>
+    <Footer />
 
 </>
 
