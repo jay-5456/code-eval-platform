@@ -15,8 +15,13 @@ return new Promise(
 (resolve,reject)=>{
 
 const dockerCommand =
-`docker run --rm -i -v "${filepath}:/app/user.py" codeeval-python python /app/user.py`;
-
+`docker run --rm -i \
+--network none \
+--memory=128m \
+--cpus=0.5 \
+-v "${filepath}:/app/user.py" \
+codeeval-python \
+python /app/user.py`;
 const process =
 exec(
 
