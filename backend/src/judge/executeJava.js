@@ -10,8 +10,7 @@ return new Promise(
 (resolve,reject)=>{
 
 const dockerCommand =
-`docker run --rm -i -v "${filepath}:/app/Main.java" codeeval-java sh -c "javac /app/Main.java && java -cp /app Main"`;
-
+`docker run --rm -i --network none --memory=128m --cpus=0.5 -v "${filepath}:/app/Main.java" codeeval-java sh -c "javac /app/Main.java && java -cp /app Main"`;
 const process =
 exec(
 dockerCommand,
