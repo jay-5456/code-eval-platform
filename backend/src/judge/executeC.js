@@ -15,8 +15,7 @@ return new Promise(
 (resolve,reject)=>{
 
 const dockerCommand =
-`docker run --rm -i -v "${filepath}:/app/user.c" codeeval-c sh -c "gcc /app/user.c -o /app/main && /app/main"`;
-
+`docker run --rm -i --network none --memory=128m --cpus=0.5 -v "${filepath}:/app/user.c" codeeval-c sh -c "gcc /app/user.c -o /app/main && /app/main"`;
 const process =
 exec(
 
