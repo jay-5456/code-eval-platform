@@ -6,6 +6,8 @@ require("./routes/auth");
 const submitRoute =require("./routes/submit");
 const adminRoute =
 require("./routes/admin");
+const leaderboardRoute =
+require("./routes/leaderboard");
 const runRoute =require("./routes/run");
 const app =express();
 const submissionsRoute =
@@ -18,6 +20,10 @@ app.use(express.json());
 app.use(
 "/auth",
 authRoute
+);
+app.use(
+"/leaderboard",
+leaderboardRoute
 );
 app.use(
 "/admin",
