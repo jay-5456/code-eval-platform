@@ -145,6 +145,18 @@ Submissions
 
 )
 }
+<Link
+to="/leaderboard"
+style={
+location.pathname==="/leaderboard"
+? activeStyle
+: linkStyle
+}
+>
+
+Leaderboard
+
+</Link>
 
 {
 user &&

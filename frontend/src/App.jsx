@@ -16,7 +16,8 @@ import AdminDashboard
 from "./pages/AdminDashboard";
 import ProblemDetails
 from "./pages/ProblemDetails";
-
+import Leaderboard
+from "./pages/Leaderboard";
 import Submissions
 from "./pages/Submissions";
 
@@ -66,6 +67,14 @@ path="/submissions"
 element={
 <ProtectedRoute>
 <Submissions />
+</ProtectedRoute>
+}
+/>
+<Route
+path="/leaderboard"
+element={
+<ProtectedRoute>
+<Leaderboard />
 </ProtectedRoute>
 }
 />
